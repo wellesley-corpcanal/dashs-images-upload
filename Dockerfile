@@ -28,6 +28,9 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 # Isso inclui o código-fonte e a pasta node_modules já instalada
 COPY --from=builder /app .
 
+# Dá ao nosso usuário permissão para escrever na pasta de uploads
+RUN chown -R appuser:appgroup /app/uploads
+
 # Define o usuário que rodará a aplicação
 USER appuser
 
